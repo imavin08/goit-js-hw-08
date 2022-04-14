@@ -24,11 +24,15 @@ inputLocalStorage();
 
 function onFormSubmit(e) {
   e.preventDefault();
-  localStorage.removeItem(STORAGE_KEY);
-  const formValue = {
-    email: e.currentTarget.email.value,
-    message: e.currentTarget.message.value,
-  };
-  console.log(formValue);
-  form.reset();
+  if (e.currentTarget.email.value === '' || e.currentTarget.message.value === '') {
+    alert('Все поля должны быть заполнены.');
+  } else {
+    localStorage.removeItem(STORAGE_KEY);
+    const formValue = {
+      email: e.currentTarget.email.value,
+      message: e.currentTarget.message.value,
+    };
+    console.log(formValue);
+    form.reset();
+  }
 }

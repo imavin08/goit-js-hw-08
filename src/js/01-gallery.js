@@ -5,19 +5,19 @@ import { galleryItems } from './gallery-items';
 // Change code below this line
 const galleryContainer = document.querySelector('.gallery');
 
-function createGallery({ preview, original, description }) {
-  return `
+function createGallery(items) {
+  const gallery = items
+    .map(({ preview, original, description }) => {
+      return `
     <a class="gallery__item" href="${original}">
     <img class="gallery__image" src="${preview}" alt="${description}" />
 </a>`;
+    })
+    .join('');
+  galleryContainer.insertAdjacentHTML('afterbegin', gallery);
 }
 
-function addGallery(value) {
-  const gallery = value.map(createGallery).join('');
-  galleryContainer.innerHTML = gallery;
-
-  makeNewGallery();
-}
+createGallery(galleryItems);
 
 function makeNewGallery() {
   new SimpleLightbox('.gallery a', {
@@ -26,5 +26,4 @@ function makeNewGallery() {
     captionDelay: 250,
   });
 }
-
-addGallery(galleryItems);
+makeNewGallery();
